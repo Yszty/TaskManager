@@ -10,4 +10,7 @@ use Illuminate\Support\Collection;
 interface TaskServiceInterface
 {
     public function createTask(Collection $data): Task;
+    public function getTask(int $task_id): ?Task;
+    public function updateTask(Collection $data): bool;
+    public function deleteTask(int $task_id): bool;
 }
