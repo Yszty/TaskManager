@@ -16,7 +16,7 @@ class TaskRepository implements TaskRepositoryInterface
             'title'       => $data->get('title'),
             'description' => $data->get('description'),
             'status'      => $data->get('status'),
-            'userId'     => $data->get('user_id'),
+            'user_id'     => $data->get('userId'),
         ]);
     }
 }
