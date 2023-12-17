@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public array $singletons = [
         TaskServiceInterface::class => TaskService::class,
+        UserServiceInterface::class => UserService::class
     ];
 
     /**

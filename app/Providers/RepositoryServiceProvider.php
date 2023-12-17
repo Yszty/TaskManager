@@ -17,6 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public array $singletons = [
         TaskRepositoryInterface::class => TaskRepository::class,
+        UserRepositoryInterface::class => UserRepository::class
     ];
 
     /**

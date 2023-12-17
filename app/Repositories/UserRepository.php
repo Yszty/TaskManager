@@ -14,8 +14,8 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::create([
             'uuid'       => $data->get('uuid'),
-            'first_name' => $data->get('first_name'),
-            'last_name'  => $data->get('last_name'),
+            'first_name' => $data->get('firstName'),
+            'last_name'  => $data->get('lastName'),
             'email'      => $data->get('email'),
         ]);
     }
