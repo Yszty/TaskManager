@@ -10,5 +10,13 @@ use Illuminate\Support\Collection;
 
 class TaskRepository implements TaskRepositoryInterface
 {
-  //
+    public function createTask(Collection $data): Task
+    {
+        return Task::create([
+            'title'       => $data->get('title'),
+            'description' => $data->get('description'),
+            'status'      => $data->get('status'),
+            'userId'     => $data->get('user_id'),
+        ]);
+    }
 }
