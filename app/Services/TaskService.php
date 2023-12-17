@@ -11,5 +11,12 @@ use Illuminate\Support\Collection;
 
 class TaskService implements TaskServiceInterface
 {
-  //
+    public function __construct(
+        private TaskRepositoryInterface $taskRepository,
+    ) {
+    }
+    public function createTask(Collection $data): Task
+    {
+        return $this->taskRepository->createTask($data);
+    }
 }
