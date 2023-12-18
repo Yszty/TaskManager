@@ -1,7 +1,7 @@
 ## Steps to install project:
 - Clone this repository.
 - Copy `.env.example` to `.env`
-- Go to `docker` folder.
+- Go to `docker-stack` folder.
 - Run `docker compose build`.
 - Run `docker compose up -d`.
 - Run `docker compose exec fpm prepare-project.sh`.
@@ -9,8 +9,8 @@
 
 ## Steps to run tests:
 - Complete installation steps
-- Go to project folder
-- Run `./vendor/bin/phpunit tests --testdox`
+- Go to `docker-stack` folder.
+- Run `docker compose exec fpm ./vendor/bin/pest --testdox`
 
 
 ## Postman endpoints documentation:
