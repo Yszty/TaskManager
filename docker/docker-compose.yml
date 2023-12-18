@@ -1,0 +1,56 @@
+version: '3.7'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+      - ../:/app
+    networks:
+      - prod-network
+
+
+    restart: always
+    depends_on:
+      fpm:
+        condition: service_started
+
+
+  fpm:
+    build:
+      context: ./php-fpm
+    volumes:
+      - ../:/app
+    networks:
+      - prod-network
+    restart: always
+
+  db:
+    platform: linux/amd64
+    build:
+      context: ./postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=development
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - sql_data:/var/lib/postgresql/data
+    networks:
+      - prod-network
+    restart: always
+
+
+
+
+networks:
+  prod-network:
+    driver: bridge
+
+volumes:
+  sql_data:
+  letsencrypt:
+  dh_param:
+  source_code:
+
