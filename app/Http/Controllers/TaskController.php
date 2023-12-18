@@ -57,6 +57,7 @@ class TaskController extends Controller
 
         if($task){
             return $this->taskService->updateTask(
+                $request->get('id'),
                 collect($request->getPayload())
             );
         }
