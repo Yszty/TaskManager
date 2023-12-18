@@ -34,3 +34,14 @@ it('create task successfully', function() {
         'status'      => $task_status,
     ]);
 });
+
+it('fail to create task with missing data', function() {
+    $response = $this->postJson("api/task/create", []);
+
+    $response->assertStatus(200);
+
+    $response->assertJson(
+        fn (AssertableJson $json) => $json->where('message', 'Validation errors')
+                                          ->hasAll(['success', 'data'])
+    );
+});
