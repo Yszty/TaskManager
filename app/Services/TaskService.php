@@ -25,7 +25,7 @@ class TaskService implements TaskServiceInterface
         return $this->taskRepository->getTask($task_id);
     }
 
-    public function updateTask(Collection $data): bool
+    public function updateTask(Collection $data): Task
     {
         return $this->taskRepository->updateTask($data);
     }

@@ -20,23 +20,22 @@ class TaskRepository implements TaskRepositoryInterface
         ]);
     }
 
-    public function getTask(int $task_id): Task
+    public function getTask(int $taskId): ?Task
     {
-        return Task::find($task_id);
+        return Task::find($taskId);
     }
-    public function updateTask(Collection $data): bool
+    public function updateTask(Collection $data): Task
     {
-        return Task::find($data->get('id'))
+        return tap(Task::find($data->get('id')))
             ->update([
                 'title'       => $data->get('title'),
                 'description' => $data->get('description'),
                 'status'      => $data->get('status'),
-                'user_id'     => $data->get('user_id'),
             ]);
     }
 
-    public function deleteTask(int $task_id): bool
+    public function deleteTask(int $taskId): bool
     {
-        return Task::find($task_id)->delete();
+        return Task::find($taskId)->delete();
     }
 }
