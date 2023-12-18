@@ -11,6 +11,6 @@ interface TaskServiceInterface
 {
     public function createTask(Collection $data): Task;
     public function getTask(int $task_id): ?Task;
-    public function updateTask(Collection $data): Task;
+    public function updateTask(int $taskId, Collection $data): Task;
     public function deleteTask(int $task_id): bool;
 }

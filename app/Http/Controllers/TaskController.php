@@ -27,7 +27,7 @@ class TaskController extends Controller
         return response()->json($tasks);
     }
 
-    public function getTask(int $id, int $userId)
+    public function getTask(int $id)
     {
         $task = $this->taskService->getTask($id);
 
@@ -38,8 +38,19 @@ class TaskController extends Controller
         return response()->json([
             'message' => 'Task not found.'
         ], 404);
-   
     }
+
+    public function changeStatus($taskId)
+    {
+        $task = $this->taskService->changeStatus($taskId);
+
+        if($task){
+            return response()->json($task);
+        }
+
+        return response()->json(['message' => 'Nothing to change'], 409);
+    }
+
     public function updateTask(TaskUpdateRequest $request)
     {
         $task = $this->taskService->getTask($request->get('id'));

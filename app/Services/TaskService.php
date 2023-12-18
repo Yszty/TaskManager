@@ -20,18 +20,31 @@ class TaskService implements TaskServiceInterface
         return $this->taskRepository->createTask($data);
     }
 
-    public function getTask(int $task_id): ?Task
+    public function getTask(int $taskId): ?Task
     {
-        return $this->taskRepository->getTask($task_id);
+        return $this->taskRepository->getTask($taskId);
     }
 
-    public function updateTask(Collection $data): Task
+    public function updateTask(int $taskId, Collection $data): Task
     {
-        return $this->taskRepository->updateTask($data);
+        return $this->taskRepository->updateTask($taskId, $data);
     }
 
-    public function deleteTask(int $task_id): bool
+    public function deleteTask(int $taskId): bool
     {
-        return $this->taskRepository->deleteTask($task_id);
+        return $this->taskRepository->deleteTask($taskId);
     }
+
+    public function changeStatus(int $taskId): ?Task
+    {
+        $task = $this->taskRepository->getTask($taskId);
+
+        return match($task->getAttribute('status')){
+            'to_do' => $this->taskRepository->updateTaskStatus($task->getAttribute('id'), 'in_progress'),
+            'in_progress' => $this->taskRepository->updateTaskStatus($task->getAttribute('id'), 'done'),
+            default => null
+        };
+
+    }
+
 }
