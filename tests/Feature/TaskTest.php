@@ -69,3 +69,29 @@ it('delete task successfully', function() {
     $task = Task::find($task_id);
     $this->assertNull($task);
 });
+
+it('edit task successfully', function() {
+    $this->postJson("api/task/create", [
+        'title'       => 'test title',
+        'description' => 'test description',
+        'status'      => 'to_do',
+        'userId'      => 1,
+    ])->assertStatus(200);
+
+    $this->postJson("api/task/update", [
+        'id'          => '1',
+        'title'       => 'another testing title',
+        'description' => 'another testing description',
+        'status'      => 'to_do',
+    ])->assertStatus(200);
+
+    $this->assertDatabaseHas(
+        'tasks', [
+            'id'          => 1,
+            'user_id'     => 1,
+            'title'       => 'another testing title',
+            'description' => 'another testing description',
+            'status'      => 'to_do',
+        ]
+    );
+});
