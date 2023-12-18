@@ -31,27 +31,12 @@ class UserController extends Controller
 
     public function importUser(string $id): JsonResponse
     {
-        $response = Http::withHeaders([
-            'app-id' => '657f5509cbe9ff32ec8df567',
-        ])->get('https://dummyapi.io/data/v1/user/' . $id);
+        $user = $this->userService->importUser($id);
 
-        if ($response->successful()) {
-            $user_data = $response->object();
-
-            if ($this->userService->getUserByEmail($user_data->email)) {
-                return response()->json(['message' => 'User already exists'], 409);
-            }
-
-            $user = $this->userService->createUser(collect([
-                'uuid'       => $user_data->id,
-                'firstName'  => $user_data->firstName,
-                'lastName'   => $user_data->lastName,
-                'email'      => $user_data->email,
-            ]));
-
-            return response()->json($user, 200);
+        if($user) {
+            return response()->json($user);
         }
 
-        return response()->json(['message' => $response->object()?->error], 400);
+        return response()->json(['message' => 'Import Error'], 400);
     }
 }
