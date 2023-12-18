@@ -26,4 +26,5 @@ Route::get('/user/import/{id}', [UserController::class, 'importUser']);
 Route::post('/task/create', [TaskController::class, 'createTask']);
 Route::get('/task/{id}', [TaskController::class, 'getTask']);
 Route::post('/task/update', [TaskController::class, 'updateTask']);
+Route::delete ('/task/delete/{id}', [TaskController::class, 'deleteTask']);
 Route::get('/task/changeStatus/{id}', [TaskController::class, 'changeStatus']);

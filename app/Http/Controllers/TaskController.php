@@ -67,4 +67,9 @@ class TaskController extends Controller
 
     }
 
+    public function deleteTask($taskId): bool
+    {
+        return $this->taskService->deleteTask($taskId);
+    }
+
 }
