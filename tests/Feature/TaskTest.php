@@ -95,3 +95,22 @@ it('edit task successfully', function() {
         ]
     );
 });
+
+it('change task status successfully', function() {
+    $this->postJson("api/task/create", [
+        'title'       => 'test title',
+        'description' => 'test description',
+        'status'      => 'to_do',
+        'userId'      => 1,
+    ])->assertStatus(200);
+
+    $this->getJson("api/task/changeStatus/1")
+         ->assertStatus(200);
+
+    $this->assertDatabaseHas(
+        'tasks', [
+            'id'     => 1,
+            'status' => 'in_progress',
+        ]
+    );
+});
