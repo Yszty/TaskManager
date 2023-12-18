@@ -2,6 +2,8 @@ FROM php:fpm-alpine
 
 RUN apk update && apk upgrade --no-cache
 
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
 RUN apk --no-cache add postgresql-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
@@ -14,4 +16,5 @@ RUN echo 'post_max_size = 128M' >> /usr/local/etc/php/conf.d/post-max-size.ini;
 RUN echo 'max_execution_time = 600' >> /usr/local/etc/php/conf.d/max-execution-time.ini;
 
 
-
+COPY prepare-project.sh /bin/prepare-project.sh
+WORKDIR /app

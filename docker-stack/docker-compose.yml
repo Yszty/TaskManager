@@ -49,8 +49,6 @@ networks:
     driver: bridge
 
 volumes:
-  sql_data:
-  letsencrypt:
-  dh_param:
   source_code:
+  sql_data:
 
